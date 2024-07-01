@@ -1,7 +1,7 @@
 from blakley import Blakley
 
 
-message = "eba"
+message = "joao"
 message_bytes = message.encode("utf-8")
 
 print(memoryview(message_bytes).tolist())

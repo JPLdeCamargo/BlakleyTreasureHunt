@@ -28,8 +28,7 @@ def readQrcode(filename):
     # if there is a QR code
     # print the data
     if vertices_array is not None:
-        print("QRCode data:")
-        print(data)
+        return data
     else:
         print("There was some error") 
 
