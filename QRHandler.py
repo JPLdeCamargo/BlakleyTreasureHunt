@@ -10,24 +10,21 @@ from Blakley import Blakley
 class QRHandler:
 
     @staticmethod
-    def generateQrCodesFromSecret(keys:list[int], p):
+    def generate_qr_codes_from_secret(keys:list[int], p):
         key_str = []
         for key in keys:
             key_str.append('-'.join(map(str, key)))
-        contador = 0
-        qr_prime = QRHandler.__create_qr_code(p)
-        # qr_prime.save('keys/normal/' + "prime.png")
-        qr_prime.resize((300, 300)).save('keys/normal/' + "prime.png")
-        for key in key_str:
-            contador += 1
-            qr_key = QRHandler.__create_qr_code(key)
-            # qr_key.save('keys/normal/' + "key_" + str(contador) + '.png')
-            qr_key.resize((300, 300)).save('keys/normal/' + "key_" + str(contador) + '.png')
 
+        qr_prime = QRHandler.__create_qr_code(p)
+        qr_prime.resize((300, 300)).save('keys/normal/' + "prime.png")
+        counter = 0
+        for key in key_str:
+            counter += 1
+            qr_key = QRHandler.__create_qr_code(key)
+            qr_key.resize((300, 300)).save('keys/normal/' + "key_" + str(counter) + '.png')
             merged = QRHandler.__edit_qr_codes(qr_key, qr_prime)
-            merged.save('keys/merged/' + "merged_key_" + str(contador) + '.png')
-        # QRHandler.__create_qr_code(p, 'keys/' + "prime.png")
-    
+            merged.save('keys/merged/' + "merged_key_" + str(counter) + '.png')
+
     @staticmethod
     def __create_qr_code(data):
         qrcode = segno.make_qr(data)
@@ -73,11 +70,9 @@ class QRHandler:
         return new_image
 
 
+    #Lê o qr code e retorna os dados em utf-8
     @staticmethod
     def read_qr(filename):
-        # Name of the QR Code Image file
-        # filename = "scaled_qrcode.png"
-        # read the QRCODE image
         image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
         code = decode(image, symbols=[ZBarSymbol.QRCODE]) 
         if len(code) > 0 and not code[0].data is None:

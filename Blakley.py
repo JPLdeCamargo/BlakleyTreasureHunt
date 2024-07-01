@@ -6,12 +6,12 @@ import random
 class Blakley:
 
     def __init__(self, a, b, p):
-        self.a: int = a
-        self.b: int = b
-        self.p: int = p
+        self.a: int = a  # número de abnegações
+        self.b: int = b  # número de traições
+        self.p: int = p  # P
 
     def encode(self, data: int):
-        v = [data]
+        v = [data] # Dado a ser guardado pelas chaves
         for i in range(self.b):
             v.append(random.randint(0, self.p-1))
         n = self.a + self.b + 1
@@ -26,7 +26,8 @@ class Blakley:
             ws.append(w)
         return ws
 
-    def decode(self,w:list[int]):
+    @staticmethod
+    def decode(w:list[list[int]],p:int):
         cs = []
         for i in range(len(w)):
             cs.append(-1*w[i][-1])
@@ -34,11 +35,11 @@ class Blakley:
         w = Matrix(w)
         cs = np.array(cs)
         try:
-            inverted_mod = w.inv_mod(self.p)
+            inverted_mod = w.inv_mod(p)
         except Exception as e:
             print(e)
             print("Inverted matrix can't be calculated")
-        secret, _, _ = np.dot(inverted_mod, cs) % self.p
+        secret, _, _ = np.dot(inverted_mod, cs) % p
         return secret
 
 if __name__ == "__main__":
