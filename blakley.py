@@ -7,7 +7,7 @@ class Blakley:
 
     # TODO: change data from int to byte array
     @staticmethod
-    def encode(a:int, b:int, p:int, data:int) -> list[list[int]]:
+    def encode(a:int, b:int, p:int, data:int) :
         v = [data]
         for i in range(b):
             v.append(random.randint(0, p-1))
@@ -24,7 +24,7 @@ class Blakley:
         return ws
 
     @staticmethod
-    def decode(w:list[list[int]], p:int) -> int:
+    def decode(w, p:int):
         cs = []
         for i in range(len(w)):
             cs.append(-1*w[i][-1])
@@ -40,7 +40,7 @@ class Blakley:
         return secret
 
 if __name__ == "__main__":
-    p = 73
+    p = 686678994773402271601694088239
     x0 = 42
     a = 2
     b = 2
