@@ -2,5 +2,7 @@ sympy
 numpy
 segno
 qrtools
+opencv-python
+opencv-python-headless
 pyzbar
-python3-zbar
+segno-pil

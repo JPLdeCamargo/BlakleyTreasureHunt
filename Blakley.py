@@ -26,7 +26,7 @@ class Blakley:
             ws.append(w)
         return ws
 
-    def decode(self,w):
+    def decode(self,w:list[int]):
         cs = []
         for i in range(len(w)):
             cs.append(-1*w[i][-1])
@@ -42,13 +42,14 @@ class Blakley:
         return secret
 
 if __name__ == "__main__":
-    p = 686678994773402271601694088239
+    p = 73
     x0 = 42
     a = 2
     b = 2
     blakley = Blakley(a,b,p)
     w = blakley.encode(x0)
     subset_w = w[:b+1]
+    blakley = Blakley(a,b,p)
     decoded = blakley.decode(subset_w)
     print(decoded)
 
